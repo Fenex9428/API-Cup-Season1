@@ -22,12 +22,12 @@ body{
 
 .player{
     
-    width:50px;
-    height:50px;
+    width:100px;
+    height:100px;
     position:absolute;
-    margin-top: 325px;
+    margin-top: 300px;
     background-image: url("ship.png");
-    background-size: 50px 50px;
+    background-size: 100px 100px;
 }
 
 #player1{
@@ -36,5 +36,10 @@ body{
 }
 #player2{
     transform: rotate(-90deg); 
-    margin-left: 900px;
+    margin-left: 850px;
+}
+
+#timer{
+    font-size: 50px;
+    
 }

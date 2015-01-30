@@ -5,26 +5,63 @@
  */
 
 
-function player(ship){
-    this.ship = ship;
-    this.pos=0;
-    this.speed=0;
-};
-
-player.prototype.move= function(){
-    this.pos +=this.speed;
-    this.ship.css("margin-top", StartPos+this.pos);
+function player(body, bodyX, enemy, enemyX){
+    var ship = body;
+    var pos=0;
+    var speed=0;
+    var acceleration = 0;
+    var shipX = bodyX;
+    var enemy = enemy;
+    var enemyX = enemyX;
+    
+    
+    function move(){
+        pos +=(speed/10);
+        ship.css("margin-top", START_POS+pos);   
+    };
+    
+    
+    function on_screen(){
+        if((pos<-MAX_POS)||(pos>MAX_POS)&&!end){
+            end = true;
+            alert(ship.attr('id') + ' Проиграл!');
+        } 
+    };
+    
+    function calc_speed(){
+        speed+=acceleration;
+        if (speed>MAX_SPEED)
+            speed = MAX_SPEED;
+        
+        if(speed<-MAX_SPEED)
+            speed = -MAX_SPEED;
+    }
+    
+    this.getacc = function(){
+        return acceleration;
+    }
+    
+    this.setacc = function(a){
+        acceleration = a;
+    }
+    
+    this.getpos = function(){
+        return pos;
+    };
+        
+    this.getspeed = function(){
+        return speed;
+    };
+    
+     this.tick = function(){
+        calc_speed();
+        move();
+        on_screen();
+    };
+   
     
 };
 
-player.prototype.on_screen= function(){
-    if((this.pos<-350)||(this.pos>350)&&!end){
-        end = true;
-        alert(this.ship + 'Проиграл!');
-    } 
-};
 
-player.prototype.tick= function(){
-    this.move();
-    this.on_screen();
-};
+
+
