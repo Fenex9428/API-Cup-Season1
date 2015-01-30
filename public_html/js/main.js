@@ -6,36 +6,29 @@
 
 var player1, player2;
 var StartPos = 325;
+var interval;
+var end = false;
 
 $( window ).load(function() {
 
 
- player1 = $("#player1");
- player2 = $("#player2");
+ player1 = new player($("#player1"));
+ player2 = new player($("#player2"));
  
- player1.pos = 0;
- player2.pos = 0;
- player1.speed=10;
- player2.speed=-10;
-
-update();
-
-setInterval(update, 100);
+interval = setInterval(update, 100);
 
 });
 
 
-function move(player){
-    player.pos +=player.speed;
-    player.css("margin-top", StartPos+player.pos);
-};
-
-
-
-
 
 function update(){
-    move(player1);
-    move(player2);
     
+    if(end)                         //Проверяем, не закончена ли игра
+        clearInterval(interval);
+    else{
+    player1.tick();
+    player1.tick();
+    
+    
+    }  
 };
